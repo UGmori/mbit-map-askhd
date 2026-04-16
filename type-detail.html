@@ -663,14 +663,8 @@ function render(typeKey) {
 
   const c = COLOR_MAP[data.groupColor];
 
-  // グループ画像マッピング
-  const GROUP_IMAGES = {
-    emerald: 'images/冒険家デザイン.png',
-    purple:  'images/分析家デザイン.png',
-    amber:   'images/探検家デザイン.png',
-    cyan:    'images/番人デザイン.png'
-  };
-  const groupImage = GROUP_IMAGES[data.groupColor];
+  // タイプ別個別画像
+  const groupImage = `images/${typeKey}.png`;
 
   // あるある行動パターン（カード）
   const behaviorCards = data.behaviors.map(b => `
@@ -856,7 +850,7 @@ function render(typeKey) {
               お互いの強みを知れば、<br class="md:hidden">チームはもっと強くなる。
             </h2>
             <p class="text-slate-300 text-sm md:text-base font-medium mb-6 max-w-lg mx-auto leading-relaxed">
-              自分のタイプを社内プロフィールに登録して、チームメンバーとの円滑なコミュニケーションに活かしましょう！
+              自分のタイプを共有して、チームメンバーとの円滑なコミュニケーションに活かしましょう！
             </p>
             <a href="index.html" class="inline-flex items-center justify-center font-black text-base py-3 px-8 rounded-full shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl" style="background: linear-gradient(to right, #f59e0b, #f97316); color: #1e293b">
               スタイルマップに戻る
