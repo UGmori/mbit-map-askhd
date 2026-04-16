@@ -675,7 +675,10 @@ function render(typeKey) {
   // あるある行動パターン（カード）
   const behaviorCards = data.behaviors.map(b => `
     <div class="${c.section} rounded-2xl p-5 border">
-      <h3 class="font-black mb-2 text-base md:text-lg" style="color:${c.dark}">${b.icon} ${b.title}</h3>
+      <h3 class="font-black mb-2 text-base md:text-lg flex items-start gap-2" style="color:${c.dark}">
+        <span class="flex-shrink-0 leading-tight">${b.icon}</span>
+        <span>${b.title}</span>
+      </h3>
       <p class="text-slate-700 text-sm leading-relaxed">${b.desc}</p>
     </div>
   `).join('');
@@ -703,13 +706,13 @@ function render(typeKey) {
 
   // 成長ポイント
   const growthPointItems = (data.growthPoints || []).map((gp, i) => `
-    <div class="flex flex-col md:flex-row gap-4 items-start">
+    <div class="flex flex-row gap-3 md:gap-4 items-start">
       <div class="w-8 h-8 rounded-full flex items-center justify-center font-black text-sm flex-shrink-0 mt-0.5" style="background-color:${c.bg}; color:${c.primary}">${i + 1}</div>
-      <div class="flex-1 w-full">
-        <h3 class="font-black text-slate-800 text-base md:text-lg mb-2">「${gp.title}」</h3>
+      <div class="flex-1 min-w-0">
+        <h3 class="font-black text-slate-800 text-base md:text-lg mb-2 leading-snug">「${gp.title}」</h3>
         <p class="text-slate-600 text-sm mb-4 leading-relaxed">${gp.desc}</p>
         <ul class="rounded-r-xl text-sm font-bold text-slate-700 space-y-2 border-l-4 p-3 md:p-4" style="border-color:${c.primary}; background-color:${c.bg}50">
-          ${(gp.bullets || []).map(b => `<li class="flex items-start"><span class="mr-2 mt-0.5" style="color:${c.primary}">▪</span><span>${b}</span></li>`).join('')}
+          ${(gp.bullets || []).map(b => `<li class="flex items-start gap-2"><span class="flex-shrink-0 mt-0.5" style="color:${c.primary}">▪</span><span>${b}</span></li>`).join('')}
         </ul>
       </div>
     </div>
@@ -782,17 +785,38 @@ function render(typeKey) {
 
         <!-- あるある行動パターン -->
         <section class="mb-10">
-          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-6 flex items-center justify-center text-center">
-            <span class="text-2xl mr-2">👀</span>
+          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-6 flex items-start gap-2">
+            <span class="text-2xl flex-shrink-0 leading-tight">👀</span>
             <span>${typeKey}の「あるある」行動パターン<span class="text-sm text-slate-500 ml-2 font-bold">（職場編）</span></span>
           </h2>
           <div class="space-y-4">${behaviorCards}</div>
         </section>
 
+        <div class="border-t-2 border-dashed border-slate-200 my-8"></div>
+
+        <!-- 強み -->
+        <section class="rounded-3xl p-8 md:p-10 shadow-xl text-white mb-8" style="background: linear-gradient(135deg, ${c.primary}, ${c.dark})">
+          <h2 class="text-xl md:text-2xl font-black mb-8 pb-3 border-b-2 border-white/20 flex items-start gap-2 text-white">
+            <span class="flex-shrink-0 leading-tight">⭐</span>
+            <span>本人の武器：職場で発揮する３つの強み</span>
+          </h2>
+          <div class="space-y-5">${strengthCards}</div>
+        </section>
+
+        <!-- 弱点 -->
+        <section class="mb-8 rounded-3xl p-6 md:p-8 border border-orange-100" style="background-color: rgba(255,247,237,0.7)">
+          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 border-orange-200 flex items-start gap-2 text-orange-800">
+            <span class="flex-shrink-0 leading-tight">⚠️</span>
+            <span>本人が抱えやすい弱点（周囲がサポートすべき点）</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">${weaknessCards}</div>
+        </section>
+
         <!-- 成長ポイント & SUMMARY -->
         <section class="mb-10 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-sm">
-          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-8 flex items-center border-b border-slate-100 pb-4">
-            <span class="text-2xl mr-2">🧭</span> このタイプの成長ポイント
+          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-8 flex items-start gap-2 border-b border-slate-100 pb-4">
+            <span class="flex-shrink-0 leading-tight">🧭</span>
+            <span>このタイプの成長ポイント</span>
           </h2>
           <div class="space-y-8">${growthPointItems}</div>
           <div class="mt-10 flex justify-center">
@@ -803,28 +827,11 @@ function render(typeKey) {
           </div>
         </section>
 
-        <div class="border-t-2 border-dashed border-slate-200 my-8"></div>
-
-        <!-- 強み -->
-        <section class="rounded-3xl p-8 md:p-10 shadow-xl text-white mb-8" style="background: linear-gradient(135deg, ${c.primary}, ${c.dark})">
-          <h2 class="text-xl md:text-2xl font-black mb-8 pb-3 border-b-2 border-white/20 flex items-center text-white">
-            <span class="mr-2 text-2xl">⭐</span> 本人の武器：職場で発揮する３つの強み
-          </h2>
-          <div class="space-y-5">${strengthCards}</div>
-        </section>
-
-        <!-- 弱点 -->
-        <section class="mb-8 rounded-3xl p-6 md:p-8 border border-orange-100" style="background-color: rgba(255,247,237,0.7)">
-          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 border-orange-200 flex items-center text-orange-800">
-            <span class="mr-2 text-2xl">⚠️</span> 本人が抱えやすい弱点（周囲がサポートすべき点）
-          </h2>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">${weaknessCards}</div>
-        </section>
-
         <!-- 接し方 -->
         <section class="mb-10">
-          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 flex items-center" style="color:${c.primary}; border-color:${c.border}">
-            <span class="mr-2 text-2xl">🤝</span> 周りのメンバーはどう接するべき？
+          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 flex items-start gap-2" style="color:${c.primary}; border-color:${c.border}">
+            <span class="flex-shrink-0 leading-tight">🤝</span>
+            <span>周りのメンバーはどう接するべき？</span>
           </h2>
           <div class="space-y-4">${commCards}</div>
         </section>
@@ -849,7 +856,7 @@ function render(typeKey) {
               お互いの強みを知れば、<br class="md:hidden">チームはもっと強くなる。
             </h2>
             <p class="text-slate-300 text-sm md:text-base font-medium mb-6 max-w-lg mx-auto leading-relaxed">
-              自分のタイプを共有して、チームメンバーとの円滑なコミュニケーションに活かしましょう！
+              自分のタイプを社内プロフィールに登録して、チームメンバーとの円滑なコミュニケーションに活かしましょう！
             </p>
             <a href="index.html" class="inline-flex items-center justify-center font-black text-base py-3 px-8 rounded-full shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl" style="background: linear-gradient(to right, #f59e0b, #f97316); color: #1e293b">
               スタイルマップに戻る
