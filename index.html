@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>16タイプ別 仕事のスタイルマップ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #e5e7eb; /* Tailwind gray-200 */
+        }
+        
+        /* デスクトップ向けの縦書きスタイル */
+        .vertical-text-md {
+            writing-mode: vertical-rl;
+            text-orientation: upright;
+            letter-spacing: 0.15em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* モバイル向けに横書きに戻す */
+        @media (max-width: 767px) {
+            .vertical-text-md {
+                writing-mode: horizontal-tb;
+                text-orientation: mixed;
+                letter-spacing: normal;
+                padding: 10px 0;
+            }
+        }
+
+        /* ホバー時のアニメーション */
+        .type-card {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .type-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 16px 24px -4px rgba(0, 0, 0, 0.18), 0 6px 10px -2px rgba(0, 0, 0, 0.08);
+        }
+        .type-card:active {
+            transform: translateY(-1px) scale(1.01);
+        }
+    </style>
+</head>
+<body class="p-2 md:p-6 lg:p-10 flex justify-center items-center min-h-screen">
+
+    <div class="w-full max-w-7xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-300">
+        <!-- ヘッダー -->
+        <div class="bg-slate-800 text-white text-center py-6 px-6 relative">
+            <h1 class="text-2xl md:text-4xl font-black mb-2 tracking-tight">仕事のスタイルマップ</h1>
+            <p class="text-slate-300 text-sm md:text-lg font-bold">チームビルディングのための16タイプ「トリセツ」</p>
+            <p class="text-slate-400 text-xs md:text-sm mt-2">👆 タイプをクリックすると、そのタイプのトリセツが開きます</p>
+        </div>
+
+        <div class="p-4 md:p-8 lg:p-10">
+            <!-- 全体マトリクスコンテナ -->
+            <div class="flex flex-col relative">
+                
+                <!-- 大Y軸 上部 -->
+                <div class="flex justify-center mb-4 md:mb-6">
+                    <div class="bg-slate-100 rounded-full px-6 py-2 border-2 border-slate-300 shadow-sm font-black text-slate-700 tracking-wide text-center">
+                        <span class="mr-2">⬆️</span>【直感タイプ】アイデア・全体像重視
+                    </div>
+                </div>
+
+                <!-- 中央の横並びコンテナ (左軸 + グリッド + 右軸) -->
+                <div class="flex flex-col md:flex-row gap-4 md:gap-6 relative items-stretch">
+                    
+                    <!-- 大X軸 左部 -->
+                    <div class="vertical-text-md bg-slate-100 rounded-xl border-2 border-slate-300 shadow-sm font-black text-slate-700 px-4 md:w-16 flex-shrink-0 text-center">
+                        <span class="md:hidden mr-2">⬅️</span>【柔軟・共感タイプ】状況や人に合わせて進める
+                    </div>
+
+                    <!-- 2x2 大グリッド -->
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative">
+                        <!-- 大マトリクスの背景十字線 (デスクトップのみ) -->
+                        <div class="hidden md:block absolute top-1/2 left-0 w-full h-2 bg-slate-200 -translate-y-1/2 rounded-full z-0"></div>
+                        <div class="hidden md:block absolute top-0 left-1/2 w-2 h-full bg-slate-200 -translate-x-1/2 rounded-full z-0"></div>
+
+                        <!-- ============================================== -->
+                        <!-- ① 左上：【NF型】外交官（緑系） -->
+                        <!-- ============================================== -->
+                        <div class="bg-emerald-50 border-4 border-emerald-400 rounded-2xl p-4 md:p-5 z-10 shadow-lg flex flex-col">
+                            <div class="text-center mb-4 border-b-2 border-emerald-200 pb-3">
+                                <h2 class="text-xl md:text-2xl font-black text-emerald-700 tracking-tight">【NF型】外交官</h2>
+                                <p class="text-xs md:text-sm font-bold text-emerald-600 mt-1">わくわく・協力型</p>
+                                <p class="text-[9px] md:text-[10px] text-emerald-500 font-bold mt-1">↕ 外向(E) - 内向(I)　｜　↔ 柔軟(P) - 計画(J)</p>
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 flex-1 relative">
+                                <!-- 小マトリクス背景十字線 -->
+                                <div class="absolute top-1/2 left-0 w-full h-px bg-emerald-200 -translate-y-1/2 z-0"></div>
+                                <div class="absolute top-0 left-1/2 w-px h-full bg-emerald-200 -translate-x-1/2 z-0"></div>
+                                
+                                <!-- ENFP -->
+                                <div class="type-card bg-white rounded-xl border border-emerald-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ENFP'" title="ENFPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 柔軟(P)</span>
+                                    <span class="text-sm md:text-base font-black text-emerald-600">運動家</span>
+                                    <span class="text-xs font-bold text-emerald-500 mb-1">ENFP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-emerald-100 pt-1 w-full">可能性を広げる<br>盛り上げ役</span>
+                                </div>
+                                <!-- ENFJ -->
+                                <div class="type-card bg-white rounded-xl border border-emerald-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ENFJ'" title="ENFJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 計画(J)</span>
+                                    <span class="text-sm md:text-base font-black text-emerald-600">主人公</span>
+                                    <span class="text-xs font-bold text-emerald-500 mb-1">ENFJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-emerald-100 pt-1 w-full">理想へ導く<br>熱血リーダー</span>
+                                </div>
+                                <!-- INFP -->
+                                <div class="type-card bg-white rounded-xl border border-emerald-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=INFP'" title="INFPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 柔軟(P)</span>
+                                    <span class="text-sm md:text-base font-black text-emerald-600">仲介者</span>
+                                    <span class="text-xs font-bold text-emerald-500 mb-1">INFP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-emerald-100 pt-1 w-full">心に寄り添う<br>サポーター</span>
+                                </div>
+                                <!-- INFJ -->
+                                <div class="type-card bg-white rounded-xl border border-emerald-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=INFJ'" title="INFJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 計画(J)</span>
+                                    <span class="text-sm md:text-base font-black text-emerald-600">提唱者</span>
+                                    <span class="text-xs font-bold text-emerald-500 mb-1">INFJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-emerald-100 pt-1 w-full">全体を見渡す<br>静かなメンター</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- ② 右上：【NT型】分析家（紫系） -->
+                        <!-- ============================================== -->
+                        <div class="bg-purple-50 border-4 border-purple-400 rounded-2xl p-4 md:p-5 z-10 shadow-lg flex flex-col">
+                            <div class="text-center mb-4 border-b-2 border-purple-200 pb-3">
+                                <h2 class="text-xl md:text-2xl font-black text-purple-700 tracking-tight">【NT型】分析家</h2>
+                                <p class="text-xs md:text-sm font-bold text-purple-600 mt-1">作戦・効率型</p>
+                                <p class="text-[9px] md:text-[10px] text-purple-500 font-bold mt-1">↕ 外向(E) - 内向(I)　｜　↔ 柔軟(P) - 計画(J)</p>
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 flex-1 relative">
+                                <!-- 小マトリクス背景十字線 -->
+                                <div class="absolute top-1/2 left-0 w-full h-px bg-purple-200 -translate-y-1/2 z-0"></div>
+                                <div class="absolute top-0 left-1/2 w-px h-full bg-purple-200 -translate-x-1/2 z-0"></div>
+
+                                <!-- ENTP -->
+                                <div class="type-card bg-white rounded-xl border border-purple-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ENTP'" title="ENTPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 柔軟(P)</span>
+                                    <span class="text-sm md:text-base font-black text-purple-600">討論者</span>
+                                    <span class="text-xs font-bold text-purple-500 mb-1">ENTP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-purple-100 pt-1 w-full">新しいやり方の<br>発明家</span>
+                                </div>
+                                <!-- ENTJ -->
+                                <div class="type-card bg-white rounded-xl border border-purple-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ENTJ'" title="ENTJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 計画(J)</span>
+                                    <span class="text-sm md:text-base font-black text-purple-600">指揮官</span>
+                                    <span class="text-xs font-bold text-purple-500 mb-1">ENTJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-purple-100 pt-1 w-full">全体を動かす<br>総司令官</span>
+                                </div>
+                                <!-- INTP -->
+                                <div class="type-card bg-white rounded-xl border border-purple-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=INTP'" title="INTPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 柔軟(P)</span>
+                                    <span class="text-sm md:text-base font-black text-purple-600">論理学者</span>
+                                    <span class="text-xs font-bold text-purple-500 mb-1">INTP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-purple-100 pt-1 w-full">データとルールの<br>分析家</span>
+                                </div>
+                                <!-- INTJ -->
+                                <div class="type-card bg-white rounded-xl border border-purple-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=INTJ'" title="INTJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 計画(J)</span>
+                                    <span class="text-sm md:text-base font-black text-purple-600">建築家</span>
+                                    <span class="text-xs font-bold text-purple-500 mb-1">INTJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-purple-100 pt-1 w-full">完璧な設計図を<br>描く策士</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- ③ 左下：【SP型】探検家（黄色系） -->
+                        <!-- ============================================== -->
+                        <div class="bg-amber-50 border-4 border-amber-400 rounded-2xl p-4 md:p-5 z-10 shadow-lg flex flex-col">
+                            <div class="text-center mb-4 border-b-2 border-amber-200 pb-3">
+                                <h2 class="text-xl md:text-2xl font-black text-amber-700 tracking-tight">【SP型】探検家</h2>
+                                <p class="text-xs md:text-sm font-bold text-amber-600 mt-1">スピード・対応型</p>
+                                <p class="text-[9px] md:text-[10px] text-amber-600 font-bold mt-1">↕ 外向(E) - 内向(I)　｜　↔ 感情(F) - 論理(T)</p>
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 flex-1 relative">
+                                <!-- 小マトリクス背景十字線 -->
+                                <div class="absolute top-1/2 left-0 w-full h-px bg-amber-200 -translate-y-1/2 z-0"></div>
+                                <div class="absolute top-0 left-1/2 w-px h-full bg-amber-200 -translate-x-1/2 z-0"></div>
+
+                                <!-- ESFP -->
+                                <div class="type-card bg-white rounded-xl border border-amber-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ESFP'" title="ESFPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 感情(F)</span>
+                                    <span class="text-sm md:text-base font-black text-amber-600">エンターテイナー</span>
+                                    <span class="text-xs font-bold text-amber-500 mb-1">ESFP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-amber-100 pt-1 w-full">空気を明るくする<br>ムードメーカー</span>
+                                </div>
+                                <!-- ESTP -->
+                                <div class="type-card bg-white rounded-xl border border-amber-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ESTP'" title="ESTPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 論理(T)</span>
+                                    <span class="text-sm md:text-base font-black text-amber-600">起業家</span>
+                                    <span class="text-xs font-bold text-amber-500 mb-1">ESTP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-amber-100 pt-1 w-full">即座に動く<br>切り込み隊長</span>
+                                </div>
+                                <!-- ISFP -->
+                                <div class="type-card bg-white rounded-xl border border-amber-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ISFP'" title="ISFPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 感情(F)</span>
+                                    <span class="text-sm md:text-base font-black text-amber-600">冒険家</span>
+                                    <span class="text-xs font-bold text-amber-500 mb-1">ISFP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-amber-100 pt-1 w-full">空気を読んで<br>補う遊撃手</span>
+                                </div>
+                                <!-- ISTP -->
+                                <div class="type-card bg-white rounded-xl border border-amber-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ISTP'" title="ISTPのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 論理(T)</span>
+                                    <span class="text-sm md:text-base font-black text-amber-600">巨匠</span>
+                                    <span class="text-xs font-bold text-amber-500 mb-1">ISTP</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-amber-100 pt-1 w-full">無駄なくこなす<br>現場の達人</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ============================================== -->
+                        <!-- ④ 右下：【SJ型】番人（青系） -->
+                        <!-- ============================================== -->
+                        <div class="bg-cyan-50 border-4 border-cyan-500 rounded-2xl p-4 md:p-5 z-10 shadow-lg flex flex-col">
+                            <div class="text-center mb-4 border-b-2 border-cyan-200 pb-3">
+                                <h2 class="text-xl md:text-2xl font-black text-cyan-700 tracking-tight">【SJ型】番人</h2>
+                                <p class="text-xs md:text-sm font-bold text-cyan-600 mt-1">きっちり・守り型</p>
+                                <p class="text-[9px] md:text-[10px] text-cyan-600 font-bold mt-1">↕ 外向(E) - 内向(I)　｜　↔ 感情(F) - 論理(T)</p>
+                            </div>
+                            <div class="grid grid-cols-2 grid-rows-2 gap-2 md:gap-3 flex-1 relative">
+                                <!-- 小マトリクス背景十字線 -->
+                                <div class="absolute top-1/2 left-0 w-full h-px bg-cyan-200 -translate-y-1/2 z-0"></div>
+                                <div class="absolute top-0 left-1/2 w-px h-full bg-cyan-200 -translate-x-1/2 z-0"></div>
+
+                                <!-- ESFJ -->
+                                <div class="type-card bg-white rounded-xl border border-cyan-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ESFJ'" title="ESFJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 感情(F)</span>
+                                    <span class="text-sm md:text-base font-black text-cyan-600">領事</span>
+                                    <span class="text-xs font-bold text-cyan-500 mb-1">ESFJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-cyan-100 pt-1 w-full">お世話好きな<br>進行サポート</span>
+                                </div>
+                                <!-- ESTJ -->
+                                <div class="type-card bg-white rounded-xl border border-cyan-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ESTJ'" title="ESTJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">外向(E) × 論理(T)</span>
+                                    <span class="text-sm md:text-base font-black text-cyan-600">幹部</span>
+                                    <span class="text-xs font-bold text-cyan-500 mb-1">ESTJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-cyan-100 pt-1 w-full">規律を守らせる<br>現場監督</span>
+                                </div>
+                                <!-- ISFJ -->
+                                <div class="type-card bg-white rounded-xl border border-cyan-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ISFJ'" title="ISFJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 感情(F)</span>
+                                    <span class="text-sm md:text-base font-black text-cyan-600">擁護者</span>
+                                    <span class="text-xs font-bold text-cyan-500 mb-1">ISFJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-cyan-100 pt-1 w-full">丁寧な作業の<br>守護神</span>
+                                </div>
+                                <!-- ISTJ -->
+                                <div class="type-card bg-white rounded-xl border border-cyan-200 shadow-sm flex flex-col justify-center items-center p-2 text-center z-10" onclick="location.href='type-detail.html?type=ISTJ'" title="ISTJのトリセツを見る">
+                                    <span class="text-[9px] text-gray-400 font-bold mb-1">内向(I) × 論理(T)</span>
+                                    <span class="text-sm md:text-base font-black text-cyan-600">ロジスティシャン</span>
+                                    <span class="text-xs font-bold text-cyan-500 mb-1">ISTJ</span>
+                                    <span class="text-[9px] md:text-[10px] font-bold text-gray-600 leading-tight border-t border-cyan-100 pt-1 w-full">ミスを許さない<br>品質チェッカー</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 大X軸 右部 -->
+                    <div class="vertical-text-md bg-slate-100 rounded-xl border-2 border-slate-300 shadow-sm font-black text-slate-700 px-4 md:w-16 flex-shrink-0 text-center">
+                        <span class="md:hidden mr-2">➡️</span>【論理・計画タイプ】筋道やルールを立てて進める
+                    </div>
+
+                </div>
+
+                <!-- 大Y軸 下部 -->
+                <div class="flex justify-center mt-4 md:mt-6">
+                    <div class="bg-slate-100 rounded-full px-6 py-2 border-2 border-slate-300 shadow-sm font-black text-slate-700 tracking-wide text-center">
+                        <span class="mr-2">⬇️</span>【現実タイプ】事実・具体性重視
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
