@@ -531,142 +531,174 @@ function render(typeKey) {
 
   const c = COLOR_MAP[data.groupColor];
 
+  // グループ画像マッピング
+  const GROUP_IMAGES = {
+    emerald: 'images/冒険家デザイン.png',
+    purple:  'images/分析家デザイン.png',
+    amber:   'images/探検家デザイン.png',
+    cyan:    'images/番人デザイン.png'
+  };
+  const groupImage = GROUP_IMAGES[data.groupColor];
+
+  // あるある行動パターン（カード）
   const behaviorCards = data.behaviors.map(b => `
-    <div class="bg-white rounded-2xl p-6 shadow-md border-l-8 card-hover" style="border-left-color:${c.primary}">
-      <div class="text-3xl mb-4">${b.icon}</div>
-      <h3 class="font-bold text-lg mb-3 text-gray-900 leading-tight">${b.title}</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">${b.desc}</p>
+    <div class="${c.section} rounded-2xl p-5 border">
+      <h3 class="font-black mb-2 text-base md:text-lg" style="color:${c.dark}">${b.icon} ${b.title}</h3>
+      <p class="text-slate-700 text-sm leading-relaxed">${b.desc}</p>
     </div>
   `).join('');
 
+  // 強み
   const strengthCards = data.strengths.map(s => `
     <div class="flex items-start bg-white/10 rounded-xl p-5 border border-white/10">
       <div class="bg-white/20 p-3 rounded-full mr-5 shrink-0 text-2xl">${s.icon}</div>
       <div>
-        <h3 class="font-bold text-xl mb-2 text-white/90">${s.title}</h3>
+        <h3 class="font-bold text-lg mb-2 text-white/90">${s.title}</h3>
         <p class="text-white/75 leading-relaxed text-sm">${s.desc}</p>
       </div>
     </div>
   `).join('');
 
+  // 弱点
   const weaknessCards = data.weaknesses.map(w => `
-    <div class="bg-white rounded-xl p-6 shadow-sm border border-orange-200 relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-1 h-full bg-orange-400"></div>
-      <div class="text-2xl mb-3">${w.icon}</div>
-      <h3 class="font-bold text-gray-900 mb-2">${w.title}</h3>
-      <p class="text-gray-600 text-sm leading-relaxed">${w.desc}</p>
+    <div class="bg-white rounded-xl p-5 shadow-sm border border-orange-200 relative overflow-hidden">
+      <div class="absolute top-0 left-0 w-1.5 h-full bg-orange-400"></div>
+      <div class="text-2xl mb-3 pl-2">${w.icon}</div>
+      <h3 class="font-black text-slate-900 mb-2 pl-2">${w.title}</h3>
+      <p class="text-slate-600 text-sm leading-relaxed pl-2">${w.desc}</p>
     </div>
   `).join('');
 
+  // 接し方
   const commCards = data.communications.map(comm => `
-    <div class="flex flex-col md:flex-row bg-white rounded-2xl p-6 shadow-sm border items-start md:items-center group card-hover" style="border-color:${c.border}">
-      <div class="p-4 rounded-full md:mr-6 mb-4 md:mb-0 shrink-0 text-2xl" style="background-color:${c.bg}">${comm.icon}</div>
+    <div class="bg-white rounded-2xl p-5 shadow-sm border flex items-start gap-4 card-hover" style="border-color:${c.border}">
+      <div class="p-3 rounded-full shrink-0 text-2xl" style="background-color:${c.bg}">${comm.icon}</div>
       <div>
-        <h3 class="font-bold text-lg mb-2" style="color:${c.primary}">${comm.title}</h3>
-        <p class="text-gray-600 text-sm leading-relaxed">${comm.desc}</p>
+        <h3 class="font-black text-base mb-1" style="color:${c.primary}">${comm.title}</h3>
+        <p class="text-slate-600 text-sm leading-relaxed">${comm.desc}</p>
       </div>
     </div>
   `).join('');
 
+  // 有名人
   const celebCards = data.celebrities.map(person => `
-    <div class="bg-white rounded-xl p-4 flex items-center shadow-sm border" style="border-color:${c.border}">
-      <div class="p-2 rounded-full mr-4 text-white text-lg w-10 h-10 flex items-center justify-center" style="background-color:${c.primary}">👤</div>
-      <div>
-        <div class="text-xs font-bold mb-0.5" style="color:${c.primary}">${person.title}</div>
-        <div class="font-bold text-gray-900 text-sm">${person.name}</div>
-      </div>
+    <div class="bg-slate-50 border border-slate-100 p-4 rounded-xl flex flex-col transition-colors hover:border-slate-300">
+      <span class="font-black text-slate-800 text-sm mb-3">${person.name}</span>
+      <span class="text-xs font-bold px-2 py-0.5 rounded-full inline-block mt-auto self-start" style="background-color:${c.bg}; color:${c.primary}">${person.title}</span>
     </div>
   `).join('');
 
   document.getElementById('app').innerHTML = `
-    <div class="min-h-screen text-gray-800 relative overflow-hidden fade-in" style="background-color:${c.hero}">
+    <div class="min-h-screen text-slate-800 fade-in" style="background-color:#f8fafc">
 
-      <!-- 背景装飾 -->
-      <div class="absolute top-0 left-0 w-full h-[550px] z-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-0 left-0 w-full h-[450px]" style="background-color:${c.heroBig}; clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%)"></div>
-        <div class="absolute top-16 left-1/2 transform -translate-x-1/2 text-[120px] md:text-[180px] font-black opacity-30 whitespace-nowrap tracking-widest select-none" style="color:${c.accent}">
-          ${data.bgText}
+      <!-- ナビゲーション -->
+      <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center">
+          <a href="index.html" class="inline-flex items-center text-sm font-bold transition-colors hover:opacity-70" style="color:${c.primary}">
+            <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            スタイルマップに戻る
+          </a>
         </div>
-      </div>
+      </nav>
 
-      <!-- 戻るボタン -->
-      <div class="relative z-20 max-w-4xl mx-auto px-4 pt-6">
-        <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold text-white shadow-md transition hover:opacity-80" style="background-color:${c.primary}">
-          ← スタイルマップに戻る
-        </a>
-      </div>
+      <main class="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
 
-      <div class="relative z-10 max-w-4xl mx-auto px-4 pb-16 sm:px-6 lg:px-8">
-
-        <!-- ヘッダー -->
-        <header class="text-center mb-16 pt-8 relative">
-          <div class="inline-block text-white px-6 py-2 rounded-full text-sm font-bold mb-6 tracking-widest shadow-md" style="background-color:${c.primary}">
+        <!-- ヒーローセクション -->
+        <header class="py-8 md:py-10 text-center">
+          <div class="inline-flex items-center justify-center font-black text-xs md:text-sm px-4 py-1.5 rounded-full mb-4 tracking-wider border" style="background-color:${c.bg}; color:${c.dark}; border-color:${c.border}">
             ${data.group}
           </div>
-          <div class="text-8xl md:text-9xl mb-4 drop-shadow-lg">${data.emoji}</div>
-          <h1 class="text-3xl md:text-5xl font-extrabold mt-4 mb-4 tracking-tight leading-tight" style="color:${c.dark}">
-            【${typeKey}（${data.name}）】<br class="sm:hidden"/>の仕事のトリセツ
+          <h1 class="text-3xl md:text-4xl font-black text-slate-800 mb-3 tracking-tight">
+            <span style="color:${c.primary}">${typeKey}</span>（${data.name}）
           </h1>
-          <p class="text-xl md:text-2xl font-black mb-3" style="color:${c.primary}">
-            ${data.tagline}
+          <p class="text-base md:text-lg font-bold text-slate-600 mb-8 leading-relaxed">
+            ${data.tagline}<br>
+            <span class="inline-block text-white px-3 py-0.5 rounded-md mt-2 shadow-sm text-sm" style="background-color:${c.primary}">${data.name}</span>
           </p>
-          <p class="text-base md:text-lg font-bold max-w-2xl mx-auto leading-relaxed mt-4 bg-white/60 backdrop-blur-sm p-4 rounded-xl" style="color:${c.dark}; border: 1px solid ${c.border}">
-            ${data.description}
-          </p>
+
+          <!-- メイン画像 -->
+          <div class="relative w-56 h-56 md:w-72 md:h-72 mx-auto mb-6 rounded-2xl overflow-hidden shadow-xl border-4 border-white">
+            <img src="${groupImage}" alt="${data.group}" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 rounded-2xl" style="box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06)"></div>
+          </div>
         </header>
 
-        <div class="space-y-16">
+        <!-- 基本の仕事スタイル -->
+        <section class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 mb-8 relative overflow-hidden">
+          <div class="absolute top-0 left-0 w-2 h-full rounded-l-2xl" style="background-color:${c.primary}"></div>
+          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-4 flex items-center pl-2">
+            <span class="text-2xl mr-2">👤</span> 基本の仕事スタイル
+          </h2>
+          <p class="text-slate-700 text-sm md:text-base leading-loose font-medium pl-2">
+            ${data.description}
+          </p>
+        </section>
 
-          <!-- 1. あるある行動 -->
-          <section>
-            <h2 class="flex items-center text-2xl font-bold mb-8 pb-2 border-b-2" style="color:${c.primary}; border-color:${c.border}">
-              <span class="mr-3 text-2xl">👀</span> ${typeKey}の「あるある」行動パターン（職場編）
+        <!-- あるある行動パターン -->
+        <section class="mb-10">
+          <h2 class="text-xl md:text-2xl font-black text-slate-800 mb-6 flex items-center justify-center text-center">
+            <span class="text-2xl mr-2">👀</span>
+            <span>${typeKey}の「あるある」行動パターン<span class="text-sm text-slate-500 ml-2 font-bold">（職場編）</span></span>
+          </h2>
+          <div class="space-y-4">${behaviorCards}</div>
+        </section>
+
+        <div class="border-t-2 border-dashed border-slate-200 my-8"></div>
+
+        <!-- 強み -->
+        <section class="rounded-3xl p-8 md:p-10 shadow-xl text-white mb-8" style="background: linear-gradient(135deg, ${c.primary}, ${c.dark})">
+          <h2 class="text-xl md:text-2xl font-black mb-8 pb-3 border-b-2 border-white/20 flex items-center text-white">
+            <span class="mr-2 text-2xl">⭐</span> 本人の武器：職場で発揮する３つの強み
+          </h2>
+          <div class="space-y-5">${strengthCards}</div>
+        </section>
+
+        <!-- 弱点 -->
+        <section class="mb-8 rounded-3xl p-6 md:p-8 border border-orange-100" style="background-color: rgba(255,247,237,0.7)">
+          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 border-orange-200 flex items-center text-orange-800">
+            <span class="mr-2 text-2xl">⚠️</span> 本人が抱えやすい弱点（周囲がサポートすべき点）
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">${weaknessCards}</div>
+        </section>
+
+        <!-- 接し方 -->
+        <section class="mb-10">
+          <h2 class="text-xl md:text-2xl font-black mb-6 pb-3 border-b-2 flex items-center" style="color:${c.primary}; border-color:${c.border}">
+            <span class="mr-2 text-2xl">🤝</span> 周りのメンバーはどう接するべき？
+          </h2>
+          <div class="space-y-4">${commCards}</div>
+        </section>
+
+        <!-- 有名人 -->
+        <section class="mb-12">
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8">
+            <h3 class="font-black text-slate-700 text-base md:text-lg mb-1 flex items-center">
+              <span class="mr-2 text-xl">👑</span> 同じタイプの有名人
+            </h3>
+            <p class="text-xs text-slate-400 font-bold mb-5 ml-8">このタイプと同じ個性を持つとされる人たちです</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${celebCards}</div>
+          </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="mb-8 relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-800 to-slate-900 text-white shadow-2xl">
+          <div class="absolute -right-10 -top-10 w-48 h-48 rounded-full blur-3xl opacity-20 pointer-events-none" style="background-color:${c.primary}"></div>
+          <div class="absolute -left-10 -bottom-10 w-40 h-40 rounded-full blur-3xl opacity-15 pointer-events-none" style="background-color:${c.accent}"></div>
+          <div class="relative p-8 md:p-10 text-center">
+            <h2 class="text-xl md:text-2xl font-black mb-3 leading-tight">
+              お互いの強みを知れば、<br class="md:hidden">チームはもっと強くなる。
             </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${behaviorCards}</div>
-          </section>
+            <p class="text-slate-300 text-sm md:text-base font-medium mb-6 max-w-lg mx-auto leading-relaxed">
+              自分のタイプを社内プロフィールに登録して、チームメンバーとの円滑なコミュニケーションに活かしましょう！
+            </p>
+            <a href="index.html" class="inline-flex items-center justify-center font-black text-base py-3 px-8 rounded-full shadow-lg transition-all hover:-translate-y-1 hover:shadow-xl" style="background: linear-gradient(to right, #f59e0b, #f97316); color: #1e293b">
+              スタイルマップに戻る
+              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            </a>
+          </div>
+        </section>
 
-          <!-- 2. 強み -->
-          <section class="rounded-3xl p-8 md:p-10 shadow-2xl text-white" style="background: linear-gradient(135deg, ${c.primary}, ${c.dark})">
-            <h2 class="flex items-center text-2xl font-bold mb-8 pb-2 border-b-2 border-white/20 text-white">
-              <span class="mr-3 text-2xl">⭐</span> 本人の武器：職場で発揮する３つの強み
-            </h2>
-            <div class="space-y-6">${strengthCards}</div>
-          </section>
-
-          <!-- 3. 弱点 -->
-          <section class="bg-orange-50/60 rounded-3xl p-8 md:p-10 border border-orange-100">
-            <h2 class="flex items-center text-2xl font-bold mb-8 pb-2 border-b-2 border-orange-200 text-orange-800">
-              <span class="mr-3 text-2xl">⚠️</span> 本人が抱えやすい弱点（周囲がサポートすべき点）
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">${weaknessCards}</div>
-          </section>
-
-          <!-- 4. 接し方 -->
-          <section>
-            <h2 class="flex items-center text-2xl font-bold mb-8 pb-2 border-b-2" style="color:${c.primary}; border-color:${c.border}">
-              <span class="mr-3 text-2xl">🤝</span> 周りのメンバーはどう接するべき？
-            </h2>
-            <div class="space-y-4">${commCards}</div>
-          </section>
-
-          <!-- 5. 有名人 -->
-          <section class="rounded-3xl p-8 md:p-10" style="background-color:${c.bg}">
-            <h2 class="flex items-center text-2xl font-bold mb-6 pb-2 border-b-2" style="color:${c.dark}; border-color:${c.border}">
-              <span class="mr-3 text-2xl">👑</span> 同じタイプの有名人
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">${celebCards}</div>
-          </section>
-
-        </div>
-
-        <!-- フッター -->
-        <footer class="mt-16 text-center text-gray-400 text-sm pb-4">
-          <a href="index.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold shadow-md hover:opacity-80 transition mb-6" style="background-color:${c.primary}">
-            ← スタイルマップに戻る
-          </a>
-          <p class="mt-4">16タイプ別 仕事のスタイルマップ</p>
-        </footer>
-      </div>
+      </main>
     </div>
   `;
 }
